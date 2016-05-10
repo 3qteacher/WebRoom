@@ -4,22 +4,28 @@ var socketIO = require('socket.io'),
 
 module.exports = function (server, config) {
     var io = socketIO.listen(server);
-
+    var result = {
+            clients: {}
+        };
+    var clients = [];
     io.sockets.on('connection', function (client) {
         client.resources = {
             screen: false,
             video: true,
             audio: false
         };
-
+        clients[client.id] = client;
         // pass a message to another id
         client.on('message', function (details) {
             if (!details) return;
 
-            var otherClient = io.to(details.to);
+        
+           //var otherClient = io.to(details.to);
+            var otherClient = clients[details.to];
             if (!otherClient) return;
-
+        
             details.from = client.id;
+            //client.emit('message', details);
             otherClient.emit('message', details);
         });
 
@@ -61,6 +67,7 @@ module.exports = function (server, config) {
             safeCb(cb)(null, describeRoom(name));
             client.join(name);
             client.room = name;
+            result.clients[client.id] = client.resources;
         }
 
         // we don't want to pass "leave" directly because the
@@ -81,7 +88,7 @@ module.exports = function (server, config) {
                 name = uuid();
             }
             // check if exists
-            var room = io.nsps['/'].adapter.rooms[name];
+            var room = io.rooms[name];
 			console.log('Creating Room ', room);
 			if (room){
 			    console.log('Room length ', room.length );
@@ -129,14 +136,15 @@ module.exports = function (server, config) {
 
 
     function describeRoom(name) {
-        var adapter = io.nsps['/'].adapter;
-        var clients = adapter.rooms[name] || {};
+        //var adapter = io.nsps['/'].adapter;
+/*
+        var clients = io.rooms[name] || {};
         var result = {
             clients: {}
         };
         Object.keys(clients).forEach(function (id) {
             result.clients[id] = adapter.nsp.connected[id].resources;
-        });
+        });*/
         return result;
     }
 

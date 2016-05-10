@@ -7,20 +7,18 @@ var //yetify = require('yetify'),
     sockets = require('./sockets'),
 	app = express(),
     port = parseInt(process.env.PORT || config.server.port, 10),
-    server = app.listen(port);
-/*
-// Create an http(s) server instance to that socket.io can listen to
-if (config.server.secure) {
-    server = require('https').Server({
+https = require('https'),
+
+http = require('http'),
+
+    https_options = {
         key: fs.readFileSync(config.server.key),
         cert: fs.readFileSync(config.server.cert),
         passphrase: config.server.password
-    }, server_handler);
-} else {
-    server = require('http').Server(server_handler);
-}
-server.listen(port);
-*/
+    },
+
+    server = https.createServer(https_options, app).listen(port);
+    //server = http.createServer(app).listen(port);
 // log requests.
 app.use(logger('dev'));
 // Static resource.

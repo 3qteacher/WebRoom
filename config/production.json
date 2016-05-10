@@ -1,12 +1,12 @@
 {
   "isDev": false,
   "server": {
-    "port": 8888,
+    "port": 443,
     "/* secure */": "/* whether this connects via https */",
     "secure": true,
     "key": "config/sslcerts/key.pem",
     "cert": "config/sslcerts/cert.pem",
-    "password": null
+    "password": "yang6600"
   },
   "rooms": {
     "/* maxClients */": "/* maximum number of clients per room. 0 = no limit */",

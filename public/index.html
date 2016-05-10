@@ -114,7 +114,7 @@ body {
     border:2px dashed #fff;
 }
     </style>
-	<script src="https://simplewebrtc.com/latest-v2.js"></script>
+	<script src="js/latest-v2.js"></script>
 	<script type="text/javascript">
 	
 var ctx, color = "#000";	
@@ -123,8 +123,8 @@ var webrtc, datachannelOpen = false;
 document.addEventListener( "DOMContentLoaded", function(){
 
 	webrtc = new SimpleWebRTC({
-		url: '127.0.0.1:8888',
-		//debug: true,
+		url: 'https://123.56.252.219:443',
+		debug: true,
 		media: {
                 video: false,
                 audio: true
@@ -158,7 +158,7 @@ document.addEventListener( "DOMContentLoaded", function(){
 			}
 		});
 		webrtc.on('channelOpen', function (channel) {
-			//console.log("Receive Channel Open ", channel.label);
+			console.log("Receive Channel Open ", channel.label);
 			datachannelOpen = true;
 		});
 		// you can name it anything
