@@ -123,19 +123,19 @@ var webrtc, datachannelOpen = false;
 document.addEventListener( "DOMContentLoaded", function(){
 
 	webrtc = new SimpleWebRTC({
-		url: 'https://123.56.252.219:443',
+		url: 'http://123.56.252.219:443',
 		debug: true,
 		media: {
                 video: false,
-                audio: true
+                audio: false
         },
-		autoRequestMedia: true
+		autoRequestMedia: false
 	});
 	// we have to wait until it's ready
 	webrtc.on('readyToCall', function () {
 	
 		webrtc.on('channelMessage', function (peer, label, data) {
-			//console.log("Data Type ", data);
+			console.log("Data Type ", data);
 			if(data.type == 'Direct'){
 				console.log("Data: ", JSON.stringify(data.payload));
 				var jsonData = eval ("(" + JSON.stringify(data.payload) + ")");

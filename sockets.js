@@ -4,6 +4,10 @@ var socketIO = require('socket.io'),
 
 module.exports = function (server, config) {
     var io = socketIO.listen(server);
+io.configure(function () {
+  io.set('transports', ['websocket', 'flashsocket', 'xhr-polling']);
+io.enable('log');
+});
     var result = {
             clients: {}
         };

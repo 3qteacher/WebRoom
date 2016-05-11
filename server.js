@@ -17,8 +17,8 @@ http = require('http'),
         passphrase: config.server.password
     },
 
-    server = https.createServer(https_options, app).listen(port);
-    //server = http.createServer(app).listen(port);
+    //server = https.createServer(https_options, app).listen(port);
+    server = http.createServer(app).listen(port);
 // log requests.
 app.use(logger('dev'));
 // Static resource.
