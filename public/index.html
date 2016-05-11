@@ -148,7 +148,7 @@ document.addEventListener( "DOMContentLoaded", function(){
 						break;
 					case 'move':
 						ctx.lineTo(jsonData.x,jsonData.y);
-						
+						ctx.lineWidth = jsonData.force
 						ctx.stroke();
 						break;	
 					case 'New':
