@@ -11,7 +11,7 @@ io.enable('log');
     var result = {
             clients: {}
         };
-    var clients = [];
+    var clients = {};
     io.sockets.on('connection', function (client) {
         client.resources = {
             screen: false,
@@ -53,6 +53,7 @@ io.enable('log');
                 if (!type) {
                     client.leave(client.room);
                     client.room = undefined;
+					
                 }
             }
         }
@@ -78,6 +79,8 @@ io.enable('log');
         // event type string of "socket end" gets passed too.
         client.on('disconnect', function () {
             removeFeed();
+			delete clients[client.id];
+			delete result.clients[client.id];
         });
         client.on('leave', function () {
             removeFeed();
