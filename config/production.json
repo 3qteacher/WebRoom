@@ -19,7 +19,7 @@
   ],
   "turnservers": [
     {
-      "urls": ["turn:your.turn.servers.here"],
+      "urls": ["turn:123.56.252.219"],
       "secret": "turnserversharedsecret",
       "expiry": 86400
     }
